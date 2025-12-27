@@ -1,0 +1,12 @@
+{
+  "src": [
+    "pages/DiaryDetail",
+    "pages/DiaryAdd",
+    "pages/DiaryEdit",
+    "pages/MainPage",
+    "pages/EditProfilePage",
+    "pages/SecurityPage",
+    "pages/LoginPage",
+    "pages/RegisterPage"
+  ]
+}

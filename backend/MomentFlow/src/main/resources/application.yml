@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/momentflow?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 111
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+
+  mail:
+    host: smtp.qq.com
+    port: 465 # QQ邮箱推荐使用465
+    username: 2365246549@qq.com
+    password: flpvwkzapqbheaig
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true # 必须开启 SSL
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
