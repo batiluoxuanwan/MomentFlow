@@ -7,6 +7,7 @@
     "pages/EditProfilePage",
     "pages/SecurityPage",
     "pages/LoginPage",
-    "pages/RegisterPage"
+    "pages/RegisterPage",
+    "pages/WebPage"
   ]
 }

@@ -4,16 +4,21 @@ import { DiaryDto } from '../model/DiaryDto'
 import { DiaryApi } from '../api/DiaryApi'
 import { User } from '../model/User';
 
-const moods: string[] = ['😊 开心', '😐 平静', '😰 焦虑', '😭 难过']
-
+// 直接拿去用，语义涵盖了感官、认知和情绪深处
+const moods: string[] = [
+  '🔋 充满动力', '✨ 确幸时刻', '🤝 归属感',  // 积极
+  '😶‍🌫️ 精神内耗', '🧊 情感隔离', '🥀 挫败感',  // 消极
+  '🧭 迷惘寻索', '🌪️ 凌乱不堪', '🍵 回甘释然',  // 复杂
+  '☁️ 平淡放空', '🕯️ 孤独享受', '⚡ 警觉紧绷'   // 状态
+]
 @Entry
 @Component
 struct DiaryAdd {
   @State title: string = ''
   @State content: string = ''
   // 设置默认值，防止 Select 组件初始显示为空
-  @State mood: string = moods[1]
-  @State moodIndex: number = 1
+  @State mood: string = moods[0]
+  @State moodIndex: number = 0
 
   // 使用 StorageLink，这样我们在 addDiary 时直接修改它，首页会自动变
   @StorageLink('diaries') diaries: Diary[] = []
@@ -96,6 +101,8 @@ struct DiaryAdd {
             .selected(this.moodIndex)
             .value(this.mood)
             .font({ size: 16 })
+            // 强制设置下拉菜单的背景色和选中后的文字颜色
+            .optionBgColor(Color.White)         // 所有选项背景设为白
             .onSelect((index: number) => {
               this.moodIndex = index
               this.mood = moods[index]

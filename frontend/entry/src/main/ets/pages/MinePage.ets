@@ -41,16 +41,6 @@ export struct MinePage {
     return total.toString();
   }
 
-  // 在 MinePage 结构体中定义跳转函数
-  openWebPage(url: string) {
-    const context = getContext(this) as common.UIAbilityContext;
-    context.startAbility({
-      action: 'ohos.want.action.viewData',
-      entities: ['entity.system.browsable'],
-      uri: url
-    });
-  }
-
   @Builder
   SettingItem(icon: Resource, title: string, rightText: string = '', action: () => void = () => {}) {
     Row() {
@@ -112,7 +102,14 @@ export struct MinePage {
         ListItem() {
           Column() {
             this.SettingItem($r('app.media.about'), '关于我们', 'v1.0.0',() => {
-              this.openWebPage('https://www.baidu.com') // 替换成你想跳转的地址
+              router.pushUrl({
+                url: 'pages/WebPage',
+                params: {
+                  // url: 'https://github.com/batiluoxuanwan/MomentFlow', // 密码的打不开
+                  url: 'https://gitee.com/GleeDean/MomentFlow',
+                  title: '项目源码'
+                }
+              })
             })
           }.backgroundColor(Color.White).borderRadius(12).margin({ top: 12 }).clip(true)
         }
