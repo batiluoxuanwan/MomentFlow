@@ -4,7 +4,12 @@ import { DiaryApi } from '../api/DiaryApi'
 import { DiaryDto } from '../model/DiaryDto';
 import { User } from '../model/User';
 
-const moods: string[] = ['😊 开心', '😐 平静', '😰 焦虑', '😭 难过']
+const moods: string[] = [
+  '🔋 充满动力', '✨ 确幸时刻', '🤝 归属感',  // 积极
+  '😶‍🌫️ 精神内耗', '🧊 情感隔离', '🥀 挫败感',  // 消极
+  '🧭 迷惘寻索', '🌪️ 凌乱不堪', '🍵 回甘释然',  // 复杂
+  '☁️ 平淡放空', '🕯️ 孤独享受', '⚡ 警觉紧绷'   // 状态
+]
 
 interface EditParams {
   id: number
@@ -19,8 +24,8 @@ struct DiaryEdit {
 
   @State title: string = ''
   @State content: string = ''
-  @State mood: string = '😐 平静'
-  @State moodIndex: number = 1
+  @State mood: string = ''
+  @State moodIndex: number = 0
   private diaryId: number = 0
 
   options: SelectOption[] = moods.map((item: string): SelectOption => { return { value: item } })

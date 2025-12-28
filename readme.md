@@ -33,6 +33,62 @@
 
 本项目采用前后端分离架构，通过 **RESTful** 协议进行数据交互。
 
+```
+MomentFlow-Frontend/src/main/ets/
+├── api/                            # 【网络请求层】封装后端 RESTful 接口
+│   ├── AIApi.ets                   # AI 情绪分析交互（调用后端 DeepSeek 中转服务）
+│   ├── DiaryApi.ets                # 日记业务逻辑（增删改查、分页、导出请求）
+│   └── UserApi.ets                 # 用户账户服务（验证码获取、登录、注册）
+├── entryability/                   # 【应用入口】生命周期管理
+│   └── EntryAbility.ets            # UIAbility 启动与窗口初始化
+├── entrybackupability/             # 【备份模块】
+│   └── EntryBackupAbility.ets      # 负责应用数据的备份与恢复逻辑
+├── model/                          # 【数据模型层】强类型定义与 DTO
+│   ├── Diary.ets                   # 日记实体模型（对应后端 Entity）
+│   ├── DiaryDto.ets                # 日记传输对象（请求入参封装）
+│   ├── R.ets                       # 全局响应体泛型包装（code, msg, data）
+│   ├── User.ets                    # 用户信息模型
+│   └── UserDto.ets                 # 登录注册交互模型
+├── pages/                          # 【视图层】全量交互界面
+│   ├── MainPage.ets                # APP 底部 Tabs 导航主框架
+│   ├── DiaryPage.ets               # 日记瀑布流主展示页
+│   ├── AnalysisPage.ets            # AI 情绪空间（图表渲染与 AI 逻辑）
+│   ├── DiaryAdd.ets                # 日记创作页面
+│   ├── DiaryDetail.ets             # 日记阅读详页
+│   ├── DiaryEdit.ets               # 旧日记内容修改页
+│   ├── LoginPage.ets               # 邮箱验证码登录页
+│   ├── RegisterPage.ets            # 新用户注册页
+│   ├── MinePage.ets                # “我的”个人中心中心页
+│   ├── EditProfilePage.ets         # 个人资料设置
+│   ├── SecurityPage.ets            # 账号安全管理
+│   └── WebPage.ets                 # 内置 H5 容器（用于展示外部内容）
+├── store/                          # 【存储层】
+│   └── DiaryStore.ets              # 全局状态管理（如本地日记缓存逻辑）
+└── utils/                          # 【工具层】通用能力封装
+    ├── HttpUtil.ets                # 基于 http.createHttp 的网络拦截器
+    └── ExportUtil.ets              # 核心工具：PDF 沙箱写入与系统级分享
+
+MomentFlow-Backend/src/main/java/com/momentflow/
+├── DiaryApplication.java           # 【启动类】项目入口与 Spring 容器配置
+├── common/                         # 【通用包】
+│   └── R.java                      # 后端统一响应结果封装（与前端 R.ets 对应）
+├── controller/                     # 【控制层】RESTful 接口暴露
+│   ├── AIController.java           # AI 分析中转接口（接入 DeepSeek）
+│   ├── DiaryController.java        # 日记业务接口（增删改查逻辑分发）
+│   └── UserController.java         # 用户账户接口（邮件发送、鉴权控制）
+├── entity/                         # 【实体层】MySQL 表结构 ORM 映射
+│   ├── Diary.java                  # 日记实体类（对应数据库表 diary）
+│   └── User.java                   # 用户实体类（对应数据库表 user）
+├── repository/                     # 【持久化层】Spring Data JPA 接口
+│   ├── DiaryRepository.java        # 日记数据访问（含自定义分页查询）
+│   └── UserRepository.java         # 用户数据访问（含邮箱唯一性校验）
+└── service/                        # 【业务层】核心逻辑处理
+    ├── AIService.java              # AI 业务接口定义
+    ├── DiaryService.java           # 日记业务接口定义
+    └── impl/                       # 【业务实现】
+        └── DiaryServiceImpl.java   # 核心实现：处理保存逻辑与时间轴排序
+```
+
 ### 1. 前端 (Client) - HarmonyOS
 
 - **开发框架**：ArkUI (ArkTS)

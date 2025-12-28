@@ -18,7 +18,7 @@ export function request<T>(url: string, options: http.HttpRequestOptions): Promi
         // 2. 这里的 T 是你在调用处传入的类型（如 User 或 string）
         const result: R<T> = JSON.parse(data.result as string) as R<T>;
 
-        // 3. 业务层校验 (后端 R.code)
+        // 3. 业务层校验 (后端 R.code)a
         if (result.code === 200) {
           // 💡 业务成功，直接把里面的 data 吐给 Service 层
           resolve(result.data);

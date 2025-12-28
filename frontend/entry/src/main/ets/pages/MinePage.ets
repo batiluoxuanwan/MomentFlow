@@ -1,6 +1,5 @@
 import { Diary } from '../model/Diary'
 import { User } from '../model/User' // 💡 记得导入 User 模型
-import { diaryStore } from '../store/DiaryStore'
 import { promptAction, router } from '@kit.ArkUI'
 import { common } from '@kit.AbilityKit'
 
